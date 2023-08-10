@@ -1,4 +1,4 @@
-"use strict";
+// "use strict";
 const randomNumber = Math.floor(Math.random() * 9) + 1;
 const playerChoice = function () {
   return prompt("Rock, paper, or scissors?").toLowerCase();
