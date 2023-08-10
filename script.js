@@ -10,7 +10,7 @@ const getComputerChoice = function () {
   console.log(randomNumber);
   if (randomNumber < 4) {
     return "rock";
-  } else if (randomNumber < 6) {
+  } else if (randomNumber < 7) {
     return "paper";
   } else return "scissors";
 };
