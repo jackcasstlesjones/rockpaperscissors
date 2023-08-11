@@ -1,15 +1,19 @@
 "use strict";
-let testing = 1012031230;
 
-const randomNumber = Math.floor(Math.random() * 9) + 1;
-const playerChoice = function () {
-  return prompt("Rock, paper, or scissors?").toLowerCase();
-};
+const rockButton = document.getElementById("rock");
+const paperButton = document.getElementById("paper");
+const scissorsButton = document.getElementById("scissors");
 
-// playerChoice();
+const myDiv = document.getElementById("div");
+const playerResultElement = document.querySelector(".player-score");
+const computerResultElement = document.querySelector(".computer-score");
+const computerChoiceElement = document.querySelector(".computer-choice");
+let playerScore = 0;
+let computerScore = 0;
 
 const getComputerChoice = function () {
-  console.log(randomNumber);
+  const randomNumber = Math.floor(Math.random() * 9) + 1;
+  // console.log(randomNumber);
   if (randomNumber < 4) {
     return "rock";
   } else if (randomNumber < 7) {
@@ -19,30 +23,66 @@ const getComputerChoice = function () {
 
 const computerChoice = getComputerChoice();
 
-console.log(computerChoice);
+const scoreFunc = function () {
+  playerResultElement.textContent = playerScore;
+  computerResultElement.textContent = computerScore;
+}; // This is what updates the text content of the result div!!!
+// scoreFunc();
+
+// console.log(computerChoice);
 
 const playRound = function (player, computer) {
-  if (player === computer) {
-    return "It's a draw!";
+  // playerScore.textContent = 0;
+  // myDiv.textContent = "You've played a round";
+  console.log("You've played a round");
+  if (playerScore > 4) {
+    myDiv.style.backgroundColor = "#90EE90";
+    return (myDiv.textContent = "You Win!!!");
+  } else if (computerScore > 4) {
+    myDiv.style.backgroundColor = "#F4364C";
+    return (myDiv.textContent = "You lose!!!");
+  } else if (player === computer) {
+    myDiv.textContent = "It's a draw!";
+    scoreFunc();
   } else if (player === "rock" && computer === "scissors") {
-    return "You win! Rock beats scissors!";
+    myDiv.textContent = "You win! Rock beats scissors!";
+    playerScore += 1;
+    scoreFunc();
   } else if (player === "rock" && computer === "paper") {
-    return "You lose! Paper beats rock!";
+    myDiv.textContent = "You lose! Paper beats rock!";
+    computerScore += 1;
+    scoreFunc();
   } else if (player === "paper" && computer === "scissors") {
-    return "You lose! Scissors beats paper!";
+    myDiv.textContent = "You lose! Scissors beats paper!";
+    computerScore += 1;
+    scoreFunc();
   } else if (player === "paper" && computer === "rock") {
-    return "You win! Paper beats rock!";
+    myDiv.textContent = "You win! Paper beats rock!";
+    playerScore += 1;
+    scoreFunc();
   } else if (player === "scissors" && computer === "paper") {
-    return "You win! Scissors beats paper!";
+    myDiv.textContent = "You win! Scissors beats paper!";
+    playerScore += 1;
+    scoreFunc();
   } else if (player === "scissors" && computer === "rock") {
-    return "You lose! Rock beats scissors!";
+    myDiv.textContent = "You lose! Rock beats scissors!";
+    computerScore += 1;
+    scoreFunc();
   }
 };
 
-const game = function () {
-  for (let i = 1; i < 6; i++) {
-    console.log(playRound(playerChoice(), computerChoice));
-  }
-};
+rockButton.addEventListener("click", function () {
+  playRound("rock", getComputerChoice());
+});
+paperButton.addEventListener("click", function () {
+  playRound("paper", getComputerChoice());
+});
+scissorsButton.addEventListener("click", function () {
+  playRound("scissors", getComputerChoice());
+});
 
-game();
+// const game = function () {
+//   for (let i = 1; i < 6; i++) {
+//     playRound(playerChoice(), computerChoice));
+//   }
+// };
